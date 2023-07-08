@@ -20,6 +20,8 @@ public class FoodSystem : MonoBehaviour
 
     [SerializeField] private float _eatAmount = 15;
 
+    [SerializeField] private RodEvent _rod;
+
     private RectTransform _foodBar;
 
     public float _currFood;
@@ -32,6 +34,7 @@ public class FoodSystem : MonoBehaviour
     {
         _foodBar = GameObject.Find("FoodMeter").GetComponent<RectTransform>();
         _spawner = GameObject.Find("BaitSpawner").GetComponent<BaitSpawner>();
+        _rod = GameObject.Find("Rod").GetComponent<RodEvent>();
         _currFood = _maxFood;
         _timer = 0f;
         _drain = 5f;
@@ -93,7 +96,8 @@ public class FoodSystem : MonoBehaviour
         if (check <= percentChanceBait)
         {
             Destroy(food);
-            Instantiate(baitTrap, food.transform.position, Quaternion.Euler(0,0, 0), null);
+            GameObject trap = Instantiate(baitTrap, food.transform.position, Quaternion.Euler(0,0, 0), null);
+            _rod.StartRodEvent(trap);
             return true;
         }
 
