@@ -11,6 +11,8 @@ public class FoodSystem : MonoBehaviour
 
     public float baitDelay = 2f;
 
+    public GameObject baitTrap;
+
     [SerializeField] private float _drain = 5f;
 
     // please keep this 100 lol
@@ -58,6 +60,8 @@ public class FoodSystem : MonoBehaviour
         if (baitRoll <= percentChanceBait)
         {
             // event for bait here
+            Destroy(food);
+            Instantiate(baitTrap, transform.position, Quaternion.Euler(0,0, 0), null);
         }
         else
         {
