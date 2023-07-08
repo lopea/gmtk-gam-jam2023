@@ -67,4 +67,11 @@ public class BaitSpawner : MonoBehaviour
             --currBait;
         }
     }
+
+    public void HandleEat(GameObject food)
+    {
+        _bait.Remove(food);
+        Destroy(food);
+        --currBait;
+    }
 }
