@@ -20,18 +20,18 @@ public class Bait : MonoBehaviour
         //Slow down time
         Time.timeScale = 0.1f;
 
-        StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpFromOriginal(baitCam.transform, 0.1f));
+        StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpFromOriginal(baitCam.transform, 0.05f));
 
 
         //Display the Quicktime Key (Either Q or E)
-        int quickRand = Random.Range(0, 1);
+        int quickRand = Random.Range(0, 100);
 
-        if (quickRand == 0)
+        if (quickRand > 50)
         {
             quickText.GetComponent<TextMeshProUGUI>().text = "[Q]";
             quickAnswer = 'Q';
         }
-        if (quickRand == 1)
+        else
         {
             quickText.GetComponent<TextMeshProUGUI>().text = "[E]";
             quickAnswer = 'E';
