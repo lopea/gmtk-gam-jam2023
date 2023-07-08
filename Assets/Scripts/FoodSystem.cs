@@ -15,14 +15,14 @@ public class FoodSystem : MonoBehaviour
 
     [SerializeField] private float _drain = 5f;
 
-    // please keep this 100 lol
-    [SerializeField] private float _maxFood = 100f;
+    // please keep this 150 lol
+    [SerializeField] private float _maxFood = 150f;
 
     [SerializeField] private float _eatAmount = 15;
 
     private RectTransform _foodBar;
 
-    private float _currFood;
+    public float _currFood;
 
     private float _timer;
     
@@ -45,6 +45,7 @@ public class FoodSystem : MonoBehaviour
         {
             _timer = 0f;
             _destination = _foodBar.localPosition.x - _drain;
+            _currFood -= _drain;
             // _foodBar.localPosition -= offset;
         }
         // float destination = _foodBar.localPosition.
@@ -52,27 +53,30 @@ public class FoodSystem : MonoBehaviour
         _foodBar.localPosition = new Vector3(Mathf.Lerp(_foodBar.localPosition.x, _destination, _timer),
             _foodBar.localPosition.y, _foodBar.localPosition.z);
         // Vector3 offset = new Vector3(_drain, 0, 0);
+        if (_currFood <= 0)
+        {
+            GameObject.Find("StateManager").GetComponent<GameStateManager>().HandleLose();
+        }
     }
 
     void EatFood(GameObject food)
     {
-        int baitRoll = Random.Range(0, 100);
-        if (baitRoll <= percentChanceBait)
-        {
-            // event for bait here
-            Destroy(food);
-            Instantiate(baitTrap, transform.position, Quaternion.Euler(0,0, 0), null);
-        }
-        else
+        if (!BaitCheck(food))
         {
             Destroy(food);
             _currFood += _eatAmount;
-            Vector3 offset = new Vector3(_eatAmount, 0, 0);
-            _foodBar.localPosition += offset;
-            _timer = 0f;
-            _destination = _foodBar.localPosition.x - _drain;
-            _spawner.HandleEat(food);
+            if (_currFood >= _maxFood)
+            {
+                _currFood = _maxFood;
+                _foodBar.position = new Vector3(75, _foodBar.position.y, _foodBar.position.z);
+            }
+            else
+            {
+                Vector3 offset = new Vector3(_eatAmount, 0, 0);
+                _foodBar.localPosition += offset;
+            }
         }
+        _spawner.HandleEat(food);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -81,5 +85,18 @@ public class FoodSystem : MonoBehaviour
         {
             EatFood(collision.gameObject);
         }
+    }
+
+    public bool BaitCheck(GameObject food)
+    {
+        int check = Random.Range(0, 100);
+        if (check <= percentChanceBait)
+        {
+            Destroy(food);
+            Instantiate(baitTrap, food.transform.position, Quaternion.Euler(0,0, 0), null);
+            return true;
+        }
+
+        return false;
     }
 }
