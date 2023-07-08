@@ -2778,6 +2778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 932926111805334452, guid: 24e1cc6f117c9f040be22f560e3c71d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24e1cc6f117c9f040be22f560e3c71d0, type: 3}
 --- !u!4 &173372866 stripped
@@ -14833,6 +14837,9 @@ MonoBehaviour:
   farClipPlane: 1000
   renderBackground: 1
   renderInEditor: 1
+  _probeGO: {fileID: 0}
+  _probe: {fileID: 0}
+  _probeSkybox: {fileID: 0}
 --- !u!1001 &1383110873
 PrefabInstance:
   m_ObjectHideFlags: 0
