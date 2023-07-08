@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [SerializeField] protected float maxSpeed = 5;
-    [SerializeField] protected float sprintSpeed = 10;
+    [SerializeField] protected float maxSpeed = 3;
+    [SerializeField] protected float sprintSpeed = 8;
     [SerializeField] protected float maxAccel = 50;
-    [SerializeField] protected float turnSpeed = 50;
-    [SerializeField] protected float sprintDeaccel = 0.2f;
+    [SerializeField] protected float turnSpeed = 100;
+    [SerializeField] protected float sprintDeaccel = 12f;
 
     private float Speed;
 
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        var camera = Camera.main;
+        //var camera = Camera.main;
 
         Vector3 fwd = new Vector3(0,0,1);
         Vector3 right = new Vector3(1,0,0);
