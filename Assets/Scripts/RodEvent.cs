@@ -6,8 +6,6 @@ public class RodEvent : MonoBehaviour
 {
     [SerializeField] private GameObject _rodEndPoint;
 
-    private GameObject _baitTrap;
-
     private LineRenderer _line;
 
     private Transform _cameraTransform;
@@ -42,12 +40,12 @@ public class RodEvent : MonoBehaviour
         _player = GameObject.Find("Player");
         _playerRb = _player.GetComponent<Rigidbody>();
         _eventStarted = false;
-        _forceMag = 50f;
+        _forceMag = 2f; 
         _forceInterval = 1f;
         _timer = _forceInterval;
         _spawner = GameObject.Find("BaitSpawner").GetComponent<BaitSpawner>();
         _gsm = GameObject.Find("StateManager").GetComponent<GameStateManager>();
-        _grace = 1f;
+        _grace = 10f;
         _graceTimer = _grace;
         _line.SetPosition(0, Vector3.zero);
         _line.SetPosition(1, Vector3.zero);
@@ -69,7 +67,6 @@ public class RodEvent : MonoBehaviour
         if (!_eventStarted)
         {
             _eventStarted = true;
-            _baitTrap = bait;
             Vector3 randomPos = new Vector3(Random.Range(0, 1f), 0, Random.Range(0, 1f));
             randomPos *= 4f;
             randomPos.y = 7;
@@ -78,7 +75,6 @@ public class RodEvent : MonoBehaviour
             _cameraTransform.position = new Vector3(_player.transform.position.x, 10, _player.transform.position.z);
             _line.SetPosition(0, _rodEndPoint.transform.position);
             _line.SetPosition(1, bait.transform.position);
-            Camera.main.transform.rotation = Quaternion.Euler(90, 0, 0);
             StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToRodEvent(_cameraTransform, 0.5f));
             Vector3 dir = transform.position - _player.transform.position;
             dir.Normalize();
@@ -109,8 +105,7 @@ public class RodEvent : MonoBehaviour
         {
             _graceEnded = true;
         }
-        _baitTrap.transform.position = _player.transform.position;
-        _line.SetPosition(1, _baitTrap.transform.position);
+        _line.SetPosition(1, _player.transform.position);
 
         Vector3 rodDist = new Vector3(transform.position.x, 0, transform.position.z);
         if (Vector3.Magnitude(_player.transform.position - rodDist) <= 0.5f && _graceEnded)
@@ -118,7 +113,7 @@ public class RodEvent : MonoBehaviour
             _gsm.HandleLose();
         }
 
-        if (Vector3.Magnitude(_player.transform.position - rodDist) >= 7f)
+        if (Vector3.Magnitude(_player.transform.position - rodDist) >= 14f)
         {
             RodEventEnd();
         }
@@ -127,7 +122,6 @@ public class RodEvent : MonoBehaviour
     private void RodEventEnd()
     {
         _eventStarted = false;
-        Destroy(_baitTrap);
         StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToOriginal(Camera.main.transform, 0.3f));
         _line.SetPosition(1, Vector3.zero);
         _line.SetPosition(0, Vector3.zero);
