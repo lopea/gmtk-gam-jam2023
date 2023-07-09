@@ -81,12 +81,11 @@ public class FoodSystem : MonoBehaviour
         }
         _spawner.HandleEat(food);
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Food"))
+        if (other.gameObject.CompareTag("Food"))
         {
-            EatFood(collision.gameObject);
+            EatFood(other.gameObject);
         }
     }
 

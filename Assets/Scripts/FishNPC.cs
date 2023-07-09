@@ -28,8 +28,8 @@ public class FishNPC : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player");
-        _spawnX = (_pond.transform.localScale.x / 2) - 0.5f;
-        _spawnZ = (_pond.transform.localScale.z / 2) - 0.5f;
+        _spawnX = 35;
+        _spawnZ = 22;
         currBait = 0;
         _bait.Capacity = 10;
         _rb = GetComponent<Rigidbody>();
