@@ -33,8 +33,8 @@ public class FishNPC : MonoBehaviour
     void Awake()
     {
         _player = GameObject.Find("Player");
-        _spawnX = 30;
-        _spawnZ = 17;
+        _spawnX = 27;
+        _spawnZ = 15;
         currBait = 0;
         _bait.Capacity = 10;
         _rb = GetComponent<Rigidbody>();

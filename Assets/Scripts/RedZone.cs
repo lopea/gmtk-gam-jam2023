@@ -30,11 +30,9 @@ public class RedZone : MonoBehaviour
         phaseThree = false;
         _player = GameObject.Find("Player");
         _zoneMultiplier = 1;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+        transform.localScale += new Vector3(Time.timeSinceLevelLoad / 45.0f, 0, Time.timeSinceLevelLoad / 45.0f);
+
         if (Time.timeSinceLevelLoad > phaseTwoThreshold)
         {
             if (!phaseTwo)
@@ -50,6 +48,11 @@ public class RedZone : MonoBehaviour
             _zoneMultiplier = 2f;
             phaseThree = true;
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (inZone)
             surviveTime -= Time.deltaTime * 0.1f * _zoneMultiplier;
         else
@@ -70,12 +73,13 @@ public class RedZone : MonoBehaviour
         if (phaseThree)
         {
             Vector3 dir = _player.transform.position - transform.position;
-            Vector3 rand = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
-            dir += rand;
+            //Vector3 rand = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
+            //dir += rand;
             dir.Normalize();
             dir.y = 0;
-            //dir *= 2f;
-            GetComponent<Rigidbody>().AddForce(dir * Time.deltaTime, ForceMode.VelocityChange);
+        //dir *= 2f;
+
+            GetComponent<Rigidbody>().velocity = dir ;
         }
 
     }

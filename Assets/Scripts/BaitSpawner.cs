@@ -29,8 +29,8 @@ public class BaitSpawner : MonoBehaviour
     void Awake()
     {
         _player = GameObject.Find("Player");
-        _spawnX = 30;
-        _spawnZ = 17;
+        _spawnX = 25;
+        _spawnZ = 16;
         currBait = 0;
         _bait.Capacity = 10;
         // Just serialize pond in editor for now, idk what the name will be

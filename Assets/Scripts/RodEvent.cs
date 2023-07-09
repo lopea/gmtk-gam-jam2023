@@ -48,7 +48,7 @@ public class RodEvent : MonoBehaviour
         _player = GameObject.Find("Player");
         _playerRb = _player.GetComponent<Rigidbody>();
         _eventStarted = false;
-        _forceMag = 3f; 
+        _forceMag = 2.9f; 
         _forceInterval = 1f;
         _timer = _forceInterval;
         _spawner = GameObject.Find("BaitSpawner").GetComponent<BaitSpawner>();
@@ -78,9 +78,9 @@ public class RodEvent : MonoBehaviour
             _eventStarted = true;
             Vector3 randomPos = new Vector3(Random.Range(0, 1f), 0, Random.Range(0, 1f));
             randomPos *= 4f;
-            randomPos.y = 7;
+            randomPos.y = 10;
             transform.position = _player.transform.position + randomPos;
-            transform.LookAt(new Vector3(_player.transform.position.x, 7, _player.transform.position.z));
+            transform.LookAt(new Vector3(_player.transform.position.x, 10, _player.transform.position.z));
             _cameraTransform.position = new Vector3(_player.transform.position.x, 15, _player.transform.position.z);
             _line.SetPosition(0, _rodEndPoint.transform.position);
             _line.SetPosition(1, _player.transform.position);
