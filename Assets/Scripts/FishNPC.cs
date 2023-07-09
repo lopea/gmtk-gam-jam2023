@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FishNPC : MonoBehaviour
 {
@@ -24,6 +27,8 @@ public class FishNPC : MonoBehaviour
 
     private Rigidbody _rb;
 
+    private bool dontChange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,9 +50,10 @@ public class FishNPC : MonoBehaviour
         }
         else
         {
-            pos = new Vector3(_pond.transform.position.x + Random.Range(-_spawnX, _spawnX),
-                _pond.transform.position.y + 0.6f, _pond.transform.position.z + Random.Range(-_spawnZ, _spawnZ));
-
+            var position = _pond.transform.position;
+            pos = new Vector3(position.x + Random.Range(-_spawnX, _spawnX),
+                position.y + 0.6f, position.z + Random.Range(-_spawnZ, _spawnZ));
+            
             idleTime = Random.Range(1, 7);
         }
     }
@@ -56,7 +62,8 @@ public class FishNPC : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, pos) > 1.0f)
         {
-            _rb.AddForce(Vector3.Normalize(pos - transform.position) * 0.1f, ForceMode.Acceleration);
+            var dir = (dontChange ? _rb.velocity.normalized : Vector3.Normalize(pos - transform.position)) * Random.Range(2.0f, 10.0f);
+            _rb.AddForce(dir, ForceMode.Acceleration);
             transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 0);
         }
         else
@@ -68,5 +75,23 @@ public class FishNPC : MonoBehaviour
     void Eat()
     {
 
+    }
+
+
+    IEnumerator UpdateDontChange()
+    {
+        dontChange = true;
+        yield return new WaitForSeconds(1.5f);
+        dontChange = false;
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Barrier") && collision.contacts.Length >= 1)
+        {
+            _rb.velocity = Vector3.Reflect(_rb.velocity, collision.contacts[0].normal); 
+            StartCoroutine(UpdateDontChange());
+        }
     }
 }
