@@ -5,18 +5,27 @@ using TMPro;
 
 public class Bait : MonoBehaviour
 {
-    private float quickTime = 1.0f;
+    private float quickTime = 1.5f;
     private char quickAnswer;
 
     public GameObject baitCam;
     public GameObject baitText;
     public GameObject quickText;
 
-    
+    [SerializeField] private GameObject _rod;
+    private bool _failed;
+
+
+    void Awake()
+    {
+        quickTime = 2.0f;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        quickTime = 1.5f;
+        _rod = GameObject.Find("Rod");
         //Slow down time
         Time.timeScale = 0.1f;
 
@@ -45,7 +54,7 @@ public class Bait : MonoBehaviour
 
         //Start timer for quicktime over
         if (quickTime > 0)
-            quickTime -= Time.deltaTime;
+            quickTime -= Time.deltaTime * 10f;
 
         //If key is correct, end event and have player "dodge" the bait trap
         if(quickAnswer == 'Q' && Input.GetKeyDown(KeyCode.Q))
@@ -56,7 +65,12 @@ public class Bait : MonoBehaviour
         {
             Pass();
         }
-
+        if (quickTime <= 0f && !_failed)
+        {
+            Fail();
+            _failed = true;
+        }
+        Debug.Log("quickTime: " + quickTime);
         //If key is wrong or timer runs out, thing fails and move on to catch event.
     }
 
@@ -65,5 +79,11 @@ public class Bait : MonoBehaviour
         Time.timeScale = 1.0f;
         StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToOriginal(baitCam.transform, 0.3f));
         Destroy(gameObject, 0.3f);
+    }
+
+    void Fail()
+    {
+        Time.timeScale = 1.0f;
+        _rod.GetComponent<RodEvent>().StartRodEvent(gameObject);
     }
 }

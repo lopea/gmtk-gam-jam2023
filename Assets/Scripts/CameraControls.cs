@@ -67,4 +67,21 @@ public class CameraControls : MonoBehaviour
             yield return null;
         }
     }
+    
+    public IEnumerator CameraLerpToRodEvent(Transform newTransform, float time)
+    {
+        float timer = 0.0f;
+
+
+        while(timer < time)
+        {
+            float t = timer / time;
+
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, newTransform.transform.position, t);
+            Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, newTransform.transform.rotation, t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+    
 }

@@ -96,7 +96,7 @@ public class FoodSystem : MonoBehaviour
         {
             Destroy(food);
             GameObject trap = Instantiate(baitTrap, food.transform.position, Quaternion.Euler(0,0, 0), null);
-            _rod.StartRodEvent(trap);
+            //_rod.StartRodEvent(trap);
             return true;
         }
 
