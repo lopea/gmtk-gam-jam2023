@@ -16,17 +16,20 @@ public class RedZone : MonoBehaviour
     public int phaseThreeThreshold = 30;
     public bool phaseTwo;
     public bool phaseThree;
+    
 
 
     public  GameObject bar;
     private GameObject _player;
 
+    private float _zoneMultiplier;
     // Start is called before the first frame update
     private void Awake()
     {
         phaseTwo = false;
         phaseThree = false;
         _player = GameObject.Find("Player");
+        _zoneMultiplier = 1;
     }
 
     // Update is called once per frame
@@ -37,18 +40,20 @@ public class RedZone : MonoBehaviour
             if (!phaseTwo)
             {
                 transform.localScale += new Vector3(2.5f, 0, 2.5f);
+                _zoneMultiplier = 1.5f;
             }
             phaseTwo = true;
         }
 
         if (Time.timeSinceLevelLoad > phaseThreeThreshold)
         {
+            _zoneMultiplier = 2f;
             phaseThree = true;
         }
         if (inZone)
-            surviveTime -= Time.deltaTime * 0.1f;
+            surviveTime -= Time.deltaTime * 0.1f * _zoneMultiplier;
         else
-            surviveTime += Time.deltaTime * 0.1f;
+            surviveTime += Time.deltaTime * 0.2f;
 
         if (surviveTime > surviveMax)
         {
