@@ -19,12 +19,15 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 scale;
 
     private int[] directions = { 0, 1, 2, 3 };
-    
 
+    private SplashSoundMaker _splash;
+
+    private bool willSplash = false;
 // Awake is called before the first frame update
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _splash = GetComponent<SplashSoundMaker>();
         scale = transform.localScale;
         Speed = maxSpeed;
     }
@@ -44,13 +47,36 @@ public class PlayerMovement : MonoBehaviour
         if (_rb.velocity.magnitude > 3.0f)
         {
             if (Input.GetMouseButton(0))
+            {
                 transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 10);
+                
+            }
             else if (Input.GetMouseButton(1))
+            {
                 transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, -20);
+            }
             else
                 transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 0);
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (willSplash)
+            {
+                _splash.Splash();
+                willSplash = !willSplash;
+            }
+            willSplash = !willSplash;
+        }
+        else if(Input.GetMouseButtonDown(1)){
+            if (willSplash)
+            {
+                _splash.Splash();
+                willSplash = !willSplash;
+            }
+            willSplash = !willSplash;
+
+        }
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             if (Speed < sprintSpeed)
