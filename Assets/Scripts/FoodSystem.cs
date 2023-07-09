@@ -28,6 +28,8 @@ public class FoodSystem : MonoBehaviour
     public float _currFood;
 
     private float _timer;
+
+    [SerializeField] private GameObject _scoreIndicator;
     
     private float _destination;
     private BaitSpawner _spawner;
@@ -114,6 +116,8 @@ public class FoodSystem : MonoBehaviour
             return true;
         }
         ScoreManager.Instance.AddScore(15);
+        GameObject _score = Instantiate(_scoreIndicator, transform);
+        _score.GetComponent<ScoreIndicator>().SetupText(15, transform.position);
         return false;
     }
 }
