@@ -244,6 +244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rodEndPoint: {fileID: 1160836488821664720}
+  ogRodPos: {x: 0, y: 0, z: 0}
+  RedZone: {fileID: 393041730993664124, guid: b7a3d1201e2728d4fa1c0e4c6281d248, type: 3}
 --- !u!1 &1160836488821664720
 GameObject:
   m_ObjectHideFlags: 0

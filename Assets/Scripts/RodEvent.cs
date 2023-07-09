@@ -6,6 +6,8 @@ public class RodEvent : MonoBehaviour
 {
     [SerializeField] private GameObject _rodEndPoint;
 
+    public Vector3 ogRodPos;
+
     public RedZone RedZone;
     private RedZone Cur_RedZone;
 
@@ -39,6 +41,7 @@ public class RodEvent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ogRodPos = transform.position;
         _line = GetComponent<LineRenderer>();
         _cameraTransform = GameObject.Find("CamPos").GetComponent<Transform>();
         _player = GameObject.Find("Player");
@@ -133,6 +136,7 @@ public class RodEvent : MonoBehaviour
 
     public void RodEventEnd()
     {
+        transform.position = ogRodPos;
         _eventStarted = false;
         StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToOriginal(Camera.main.transform, 0.3f));
         _line.SetPosition(1, Vector3.zero);
