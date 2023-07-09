@@ -6,6 +6,9 @@ public class RodEvent : MonoBehaviour
 {
     [SerializeField] private GameObject _rodEndPoint;
 
+    public RedZone RedZone;
+    private RedZone Cur_RedZone;
+
     private LineRenderer _line;
 
     private Transform _cameraTransform;
@@ -28,6 +31,7 @@ public class RodEvent : MonoBehaviour
 
     private GameStateManager _gsm;
 
+
     private float _grace;
     private float _graceTimer;
 
@@ -40,7 +44,7 @@ public class RodEvent : MonoBehaviour
         _player = GameObject.Find("Player");
         _playerRb = _player.GetComponent<Rigidbody>();
         _eventStarted = false;
-        _forceMag = 4f; 
+        _forceMag = 3f; 
         _forceInterval = 1f;
         _timer = _forceInterval;
         _spawner = GameObject.Find("BaitSpawner").GetComponent<BaitSpawner>();
@@ -88,6 +92,9 @@ public class RodEvent : MonoBehaviour
                 if(obj != null)
                     obj.SetActive(false);
             }
+
+            Cur_RedZone = Instantiate(RedZone, _player.transform.position, Quaternion.identity, null);
+            Cur_RedZone.rodRef = this;
         }
     }
 
@@ -97,7 +104,7 @@ public class RodEvent : MonoBehaviour
         _timer -= Time.deltaTime;
         if (_timer <= 0f)
         {
-            Vector3 dir = transform.position - _player.transform.position;
+            Vector3 dir = Cur_RedZone.transform.position - _player.transform.position;
             dir.Normalize();
             dir.y = 0;
             _forceDir = dir;
@@ -112,7 +119,8 @@ public class RodEvent : MonoBehaviour
         _line.SetPosition(1, _player.transform.position);
 
         Vector3 rodDist = new Vector3(transform.position.x, 0, transform.position.z);
-        if (Vector3.Magnitude(_player.transform.position - rodDist) <= 3f && _graceEnded)
+        
+        /*if (Vector3.Magnitude(_player.transform.position - rodDist) <= 3f && _graceEnded)
         {
             _gsm.HandleLose();
         }
@@ -120,10 +128,10 @@ public class RodEvent : MonoBehaviour
         if (Vector3.Magnitude(_player.transform.position - rodDist) >= 14f)
         {
             RodEventEnd();
-        }
+        }*/
     }
 
-    private void RodEventEnd()
+    public void RodEventEnd()
     {
         _eventStarted = false;
         StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToOriginal(Camera.main.transform, 0.3f));
