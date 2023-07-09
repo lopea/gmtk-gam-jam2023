@@ -33,6 +33,7 @@ public class RodEvent : MonoBehaviour
 
     private GameStateManager _gsm;
 
+    private FoodSystem _foodSystem;
 
     private float _grace;
     private float _graceTimer;
@@ -56,6 +57,7 @@ public class RodEvent : MonoBehaviour
         _graceTimer = _grace;
         _line.SetPosition(0, Vector3.zero);
         _line.SetPosition(1, Vector3.zero);
+        _foodSystem = _player.GetComponent<FoodSystem>();
         //_cameraTransform.position = new Vector3(0, 10, 0);
         //_cameraTransform.forward = new Vector3(0, -1, 0);
     }
@@ -147,7 +149,7 @@ public class RodEvent : MonoBehaviour
                 obj.SetActive(true);
         }
         ScoreManager.Instance.AddScore(30);
+        _foodSystem.gracePeriod = true;
 
-        
     }
 }
