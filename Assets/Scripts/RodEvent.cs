@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RodEvent : MonoBehaviour
@@ -39,7 +40,8 @@ public class RodEvent : MonoBehaviour
 
     private float _grace;
     private float _graceTimer;
-
+    [SerializeField] private AudioSource soudn;
+    private AudioSource _inst;
     private bool _graceEnded;
     // Awake is called before the first frame update
     void Awake()
@@ -102,6 +104,9 @@ public class RodEvent : MonoBehaviour
 
             Cur_RedZone = Instantiate(RedZone, _player.transform.position, Quaternion.identity, null);
             Cur_RedZone.rodRef = this;
+
+            _inst = Instantiate(soudn, transform.position, transform.rotation);
+            _inst.AddComponent<ShutupOnDeath>();
         }
     }
 
@@ -154,6 +159,7 @@ public class RodEvent : MonoBehaviour
         GameObject _score = Instantiate(_scoreIndicator, _player.transform);
         _score.GetComponent<ScoreIndicator>().SetupText(30, _player.transform.position);
         _foodSystem.gracePeriod = true;
+        Destroy(_inst);
 
     }
 }

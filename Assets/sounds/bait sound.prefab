@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3088611088279474658}
   - component: {fileID: -3489239191193367713}
   m_Layer: 0
-  m_Name: spash 1
+  m_Name: bait sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,9 +42,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cc17fde95b696f6269038b95cd9a2c89, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d8a6deb92e33300c69417c4198dcfd04, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.468
+  m_Volume: 0.776
   m_Pitch: 1
   Loop: 0
   Mute: 0

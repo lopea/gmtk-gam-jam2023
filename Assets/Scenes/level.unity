@@ -1820,6 +1820,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1160836488072902923, guid: 0df50f4f5db4e674c9834b97a415b0c7, type: 3}
+      propertyPath: soudn
+      value: 
+      objectReference: {fileID: -3489239191193367713, guid: 9cbae222dcfa84ef6b8450f75b14d1d9, type: 3}
     - target: {fileID: 1160836488072902934, guid: 0df50f4f5db4e674c9834b97a415b0c7, type: 3}
       propertyPath: m_Name
       value: Rod
@@ -10496,7 +10500,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.472
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -11664,7 +11668,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.518
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
