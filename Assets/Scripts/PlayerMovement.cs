@@ -44,9 +44,9 @@ public class PlayerMovement : MonoBehaviour
         if (_rb.velocity.magnitude > 3.0f)
         {
             if (Input.GetMouseButton(0))
-                transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 5);
+                transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 10);
             else if (Input.GetMouseButton(1))
-                transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, -10);
+                transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, -20);
             else
                 transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 0);
         }
