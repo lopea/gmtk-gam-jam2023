@@ -70,7 +70,6 @@ public class Bait : MonoBehaviour
             Fail();
             _failed = true;
         }
-        Debug.Log("quickTime: " + quickTime);
         //If key is wrong or timer runs out, thing fails and move on to catch event.
     }
 

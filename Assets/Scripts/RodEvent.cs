@@ -29,6 +29,11 @@ public class RodEvent : MonoBehaviour
     private BaitSpawner _spawner;
 
     private GameStateManager _gsm;
+
+    private float _grace;
+    private float _graceTimer;
+
+    private bool _graceEnded;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +47,8 @@ public class RodEvent : MonoBehaviour
         _timer = _forceInterval;
         _spawner = GameObject.Find("BaitSpawner").GetComponent<BaitSpawner>();
         _gsm = GameObject.Find("StateManager").GetComponent<GameStateManager>();
+        _grace = 1f;
+        _graceTimer = _grace;
         //_cameraTransform.position = new Vector3(0, 10, 0);
         //_cameraTransform.forward = new Vector3(0, -1, 0);
     }
@@ -83,22 +90,28 @@ public class RodEvent : MonoBehaviour
 
     private void UpdateRodEvent()
     {
+        _graceTimer -= Time.deltaTime;
         _timer -= Time.deltaTime;
-        _baitTrap.transform.position = _player.transform.position;
-        _line.SetPosition(1, _baitTrap.transform.position);
         if (_timer <= 0f)
         {
             _playerRb.AddForce(_forceDir * _forceMag, ForceMode.Impulse);
             _timer = _forceInterval;
         }
 
+        if (_graceTimer <= 0f)
+        {
+            _graceEnded = true;
+        }
+        _baitTrap.transform.position = _player.transform.position;
+        _line.SetPosition(1, _baitTrap.transform.position);
+
         Vector3 rodDist = new Vector3(transform.position.x, 0, transform.position.z);
-        if (Vector3.Magnitude(_player.transform.position - rodDist) <= 2f)
+        if (Vector3.Magnitude(_player.transform.position - rodDist) <= 0.5f && _graceEnded)
         {
             _gsm.HandleLose();
         }
 
-        if (Vector3.Magnitude(_player.transform.position - rodDist) >= 10f)
+        if (Vector3.Magnitude(_player.transform.position - rodDist) >= 7f)
         {
             RodEventEnd();
         }
@@ -111,5 +124,9 @@ public class RodEvent : MonoBehaviour
         StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToOriginal(Camera.main.transform, 0.3f));
         _line.SetPosition(1, Vector3.zero);
         _line.SetPosition(0, Vector3.zero);
+        foreach (var obj in _spawner._bait)
+        {
+            obj.SetActive(true);
+        }
     }
 }
