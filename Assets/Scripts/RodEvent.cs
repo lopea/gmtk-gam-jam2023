@@ -61,7 +61,6 @@ public class RodEvent : MonoBehaviour
         {
             _eventStarted = true;
             _baitTrap = bait;
-            _eventStarted = true;
             Vector3 randomPos = Random.onUnitSphere * 10;
             randomPos.y = 7;
             transform.position = randomPos;
@@ -92,6 +91,26 @@ public class RodEvent : MonoBehaviour
             _playerRb.AddForce(_forceDir * _forceMag, ForceMode.Impulse);
             _timer = _forceInterval;
         }
-        //if (Vector3.Magnitude())
+
+
+        Vector3 rodDist = new Vector3(transform.position.x, 0, transform.position.z);
+        if (Vector3.Magnitude(_player.transform.position - rodDist) <= 2f)
+        {
+            _gsm.HandleLose();
+        }
+
+        if (Vector3.Magnitude(_player.transform.position - rodDist) >= 10f)
+        {
+            RodEventEnd();
+        }
+    }
+
+    private void RodEventEnd()
+    {
+        _eventStarted = false;
+        Destroy(_baitTrap);
+        StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToOriginal(Camera.main.transform, 0.3f));
+        _line.SetPosition(1, Vector3.zero);
+        _line.SetPosition(0, Vector3.zero);
     }
 }
