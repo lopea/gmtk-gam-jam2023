@@ -10,8 +10,8 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private GameObject _loseUI;
 
     [SerializeField] private GameObject _winUI;
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before the first frame update
+    void Awake()
     {
         _mainUI.SetActive(true);
         _loseUI.SetActive(false);

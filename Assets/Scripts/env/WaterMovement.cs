@@ -7,8 +7,8 @@ namespace env
         [SerializeField] private Texture ripple_texture;
 
         private Renderer _mat;
-        // Start is called before the first frame update
-        void Start()
+        // Awake is called before the first frame update
+        void Awake()
         {
             _mat = GetComponent<Renderer>();
             Material main_mat = _mat.material;

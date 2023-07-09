@@ -7,8 +7,8 @@ public class CameraControls : MonoBehaviour
     private Vector3 ogMainCamPos;
     private Quaternion ogMainCamRot;
 
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before the first frame update
+    void Awake()
     {
         //Store original main camera position
         ogMainCamPos = Camera.main.transform.position;

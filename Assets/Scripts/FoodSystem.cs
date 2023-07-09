@@ -32,7 +32,7 @@ public class FoodSystem : MonoBehaviour
     private BaitSpawner _spawner;
     public bool gracePeriod;
     private float _graceTimer;
-    void Start()
+    void Awake()
     {
         _foodBar = GameObject.Find("FoodMeter").GetComponent<RectTransform>();
         _spawner = GameObject.Find("BaitSpawner").GetComponent<BaitSpawner>();

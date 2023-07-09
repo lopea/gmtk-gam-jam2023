@@ -25,8 +25,8 @@ public class BaitSpawner : MonoBehaviour
     [SerializeField] public List<GameObject> _bait;
     
     
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before the first frame update
+    void Awake()
     {
         _player = GameObject.Find("Player");
         _spawnX = 30;

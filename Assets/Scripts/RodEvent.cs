@@ -39,8 +39,8 @@ public class RodEvent : MonoBehaviour
     private float _graceTimer;
 
     private bool _graceEnded;
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before the first frame update
+    void Awake()
     {
         ogRodPos = transform.position;
         _line = GetComponent<LineRenderer>();

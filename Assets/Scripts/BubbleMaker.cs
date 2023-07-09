@@ -17,8 +17,8 @@ public class BubbleMaker : MonoBehaviour
     public float MaxLifetime = 10;
 
     public float MaxParticles = 100;
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before the first frame update
+    void Awake()
     {
         _ps = Instantiate(_prefab, transform);
         _ps.transform.localPosition = Vector3.right * 2f;
@@ -30,11 +30,11 @@ public class BubbleMaker : MonoBehaviour
     {
         var speed = (_rb.velocity.magnitude/MaxLifetime);
         var main = _ps.main;
-        main.maxParticles = (int)(speed * MaxParticles * 1000.0f);
-        main.startLifetime = speed * MaxLifetime;
+        main.maxParticles = (int)(speed * MaxParticles * 100.0f);
+        main.startLifetime = speed * MaxLifetime * .5f;
         main.startSize = speed * MaxSize;
         var emission = _ps.emission;
-        emission.burstCount = (int)(speed * MaxParticles/10.0f);
+        emission.burstCount = (int)(speed * MaxParticles/20.0f);
         
     }
 }

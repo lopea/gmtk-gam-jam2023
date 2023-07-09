@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private int[] directions = { 0, 1, 2, 3 };
     
 
-// Start is called before the first frame update
-    void Start()
+// Awake is called before the first frame update
+    void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         scale = transform.localScale;

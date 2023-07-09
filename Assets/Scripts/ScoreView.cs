@@ -5,8 +5,8 @@ public class ScoreView : MonoBehaviour
 {
     private TMP_Text _text;
 
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before the first frame update
+    void Awake()
     {
         _text = GetComponentInChildren<TMP_Text>();
         _text.text = " Score 0";
