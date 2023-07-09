@@ -58,6 +58,7 @@ public class RedZone : MonoBehaviour
         else if (surviveTime < 0.0)
         {
             GameObject.Find("StateManager").GetComponent<GameStateManager>().HandleLose();
+            Destroy(gameObject);
         }
 
         bar.transform.localScale = new Vector3(surviveTime, 1, 1);
