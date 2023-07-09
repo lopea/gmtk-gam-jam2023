@@ -92,6 +92,6 @@ public class RodEvent : MonoBehaviour
             _playerRb.AddForce(_forceDir * _forceMag, ForceMode.Impulse);
             _timer = _forceInterval;
         }
-        if (Vector3.Magnitude())
+        //if (Vector3.Magnitude())
     }
 }
