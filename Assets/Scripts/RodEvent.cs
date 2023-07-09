@@ -49,6 +49,8 @@ public class RodEvent : MonoBehaviour
         _gsm = GameObject.Find("StateManager").GetComponent<GameStateManager>();
         _grace = 1f;
         _graceTimer = _grace;
+        _line.SetPosition(0, Vector3.zero);
+        _line.SetPosition(1, Vector3.zero);
         //_cameraTransform.position = new Vector3(0, 10, 0);
         //_cameraTransform.forward = new Vector3(0, -1, 0);
     }
