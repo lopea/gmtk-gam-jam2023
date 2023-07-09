@@ -16,13 +16,10 @@ public class Bait : MonoBehaviour
     private bool _passed = false;
 
 
-    void Awake()
-    {
-        quickTime = 2.0f;
-    }
 
-    // Start is called before the first frame update
-    void Start()
+
+    // Awake is called before the first frame update
+    void Awake()
     {
         quickTime = 1.5f;
         _rod = GameObject.Find("Rod");
@@ -37,7 +34,7 @@ public class Bait : MonoBehaviour
     {
         //Lerp Main camera over to bait camera
 
-        //Start timer for quicktime over
+        //Awake timer for quicktime over
         if (quickTime > 0)
             quickTime -= Time.deltaTime * 10f;
         else if (quickTime <= 0f && !_failed)

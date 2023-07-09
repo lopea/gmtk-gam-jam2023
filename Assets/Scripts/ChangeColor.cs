@@ -11,8 +11,8 @@ public class ChangeColor : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     [SerializeField] private Color idle, hovered, pressed;
     
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called before the first frame update
+    void Awake()
     {
         _text = GetComponentInChildren<TMP_Text>();
     }
@@ -25,6 +25,7 @@ public class ChangeColor : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public static void ChangeToScene(int index)
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(index);
     }
 

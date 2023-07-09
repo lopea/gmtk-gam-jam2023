@@ -7,7 +7,7 @@ public class BaitCheck : MonoBehaviour
 {
     private FoodSystem _system;
 
-    private void Start()
+    private void Awake()
     {
         _system = GameObject.Find("Player").GetComponent<FoodSystem>();
     }
