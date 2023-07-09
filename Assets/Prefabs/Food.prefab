@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1783856584029784293}
   - component: {fileID: 8816116479563417130}
   - component: {fileID: 4262334682791814011}
+  - component: {fileID: 6246880219921017810}
   m_Layer: 7
   m_Name: BaitCheck
   m_TagString: Untagged
@@ -58,6 +59,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfbdc5fb9532ff64898e8b5f94919fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6246880219921017810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4179466241443687541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7c352d2a60dd6d49c1bb175f80f1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
 --- !u!1 &4974924056978652501
 GameObject:
   m_ObjectHideFlags: 0
