@@ -41,12 +41,15 @@ public class PlayerMovement : MonoBehaviour
         else
             transform.localScale = new Vector3(scale.x, scale.y, scale.z);
 
-        if (Input.GetMouseButton(0))
-            transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 5);
-        else if (Input.GetMouseButton(1))
-            transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, -10);
-        else
-            transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 0);
+        if (_rb.velocity.magnitude > 3.0f)
+        {
+            if (Input.GetMouseButton(0))
+                transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 5);
+            else if (Input.GetMouseButton(1))
+                transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, -10);
+            else
+                transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 0);
+        }
 
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
