@@ -40,12 +40,12 @@ public class RodEvent : MonoBehaviour
         _player = GameObject.Find("Player");
         _playerRb = _player.GetComponent<Rigidbody>();
         _eventStarted = false;
-        _forceMag = 2f; 
+        _forceMag = 4f; 
         _forceInterval = 1f;
         _timer = _forceInterval;
         _spawner = GameObject.Find("BaitSpawner").GetComponent<BaitSpawner>();
         _gsm = GameObject.Find("StateManager").GetComponent<GameStateManager>();
-        _grace = 10f;
+        _grace = 3f;
         _graceTimer = _grace;
         _line.SetPosition(0, Vector3.zero);
         _line.SetPosition(1, Vector3.zero);
@@ -62,7 +62,7 @@ public class RodEvent : MonoBehaviour
         }
     }
 
-    public void StartRodEvent(GameObject bait)
+    public void StartRodEvent()
     {
         if (!_eventStarted)
         {
@@ -72,17 +72,21 @@ public class RodEvent : MonoBehaviour
             randomPos.y = 7;
             transform.position = _player.transform.position + randomPos;
             transform.LookAt(new Vector3(_player.transform.position.x, 7, _player.transform.position.z));
-            _cameraTransform.position = new Vector3(_player.transform.position.x, 10, _player.transform.position.z);
+            _cameraTransform.position = new Vector3(_player.transform.position.x, 15, _player.transform.position.z);
             _line.SetPosition(0, _rodEndPoint.transform.position);
-            _line.SetPosition(1, bait.transform.position);
+            _line.SetPosition(1, _player.transform.position);
             StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToRodEvent(_cameraTransform, 0.5f));
             Vector3 dir = transform.position - _player.transform.position;
             dir.Normalize();
             dir.y = 0;
+            _graceTimer = _grace;
+            _timer = _forceInterval;
+            _graceEnded = false;
             _forceDir = dir;
             foreach (var obj in _spawner._bait)
             {
-                obj.SetActive(false);
+                if(obj != null)
+                    obj.SetActive(false);
             }
         }
     }
@@ -108,7 +112,7 @@ public class RodEvent : MonoBehaviour
         _line.SetPosition(1, _player.transform.position);
 
         Vector3 rodDist = new Vector3(transform.position.x, 0, transform.position.z);
-        if (Vector3.Magnitude(_player.transform.position - rodDist) <= 0.5f && _graceEnded)
+        if (Vector3.Magnitude(_player.transform.position - rodDist) <= 3f && _graceEnded)
         {
             _gsm.HandleLose();
         }
@@ -127,7 +131,8 @@ public class RodEvent : MonoBehaviour
         _line.SetPosition(0, Vector3.zero);
         foreach (var obj in _spawner._bait)
         {
-            obj.SetActive(true);
+            if(obj != null)
+                obj.SetActive(true);
         }
     }
 }

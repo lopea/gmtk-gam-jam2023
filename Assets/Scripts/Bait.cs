@@ -85,7 +85,7 @@ public class Bait : MonoBehaviour
     void Fail()
     {
         Time.timeScale = 1.0f;
-        _rod.GetComponent<RodEvent>().StartRodEvent(gameObject);
+        _rod.GetComponent<RodEvent>().StartRodEvent();
         Destroy(gameObject, 0.1f);
     }
 }
