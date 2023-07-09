@@ -10600,6 +10600,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: dc6d69e5caa060f0abe5875b91982465, type: 2}
+    - target: {fileID: 2321545031561397949, guid: 4a5886cba49f08d4e8920cf5b3ab6ea9, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321545031561397949, guid: 4a5886cba49f08d4e8920cf5b3ab6ea9, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321545031561397949, guid: 4a5886cba49f08d4e8920cf5b3ab6ea9, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321545031561397949, guid: 4a5886cba49f08d4e8920cf5b3ab6ea9, type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 2321545031561397950, guid: 4a5886cba49f08d4e8920cf5b3ab6ea9, type: 3}
       propertyPath: maxSpeed
       value: 4
@@ -19752,9 +19768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 5171176401227578678, guid: c4f07d8aa7e883c0d8c47dc3997235a1, type: 3}
-  MaxSize: 0.3
+  MaxSize: 0.01
   MaxSpeed: 10
-  MaxLifetime: 5
+  MaxLifetime: 0.1
   MaxParticles: 100
 --- !u!1001 &1709861783
 PrefabInstance:
