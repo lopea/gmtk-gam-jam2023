@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class FoodSystem : MonoBehaviour
@@ -13,16 +14,16 @@ public class FoodSystem : MonoBehaviour
 
     public GameObject baitTrap;
 
-    [SerializeField] private float _drain = 5f;
+    [SerializeField] private float _drain = 15f;
 
     // please keep this 150 lol
     [SerializeField] private float _maxFood = 150f;
 
-    [SerializeField] private float _eatAmount = 15;
+    private float _eatAmount = 30;
 
     [SerializeField] private RodEvent _rod;
 
-    private RectTransform _foodBar;
+    private Image _foodBar;
 
     public float _currFood;
 
@@ -34,12 +35,12 @@ public class FoodSystem : MonoBehaviour
     private float _graceTimer;
     void Awake()
     {
-        _foodBar = GameObject.Find("FoodMeter").GetComponent<RectTransform>();
+        _foodBar = GameObject.Find("FoodMeter").GetComponent<Image>();
         _spawner = GameObject.Find("BaitSpawner").GetComponent<BaitSpawner>();
         _rod = GameObject.Find("Rod").GetComponent<RodEvent>();
         _currFood = _maxFood;
         _timer = 0f;
-        _drain = 5f;
+        _drain = 2.5f;
         _graceTimer = baitDelay;
     }
     
@@ -59,14 +60,18 @@ public class FoodSystem : MonoBehaviour
         if (_timer >= 1f)
         {
             _timer = 0f;
-            _destination = _foodBar.localPosition.x - _drain;
+            //_destination = _foodBar.localPosition.x - _drain;
             _currFood -= _drain;
-            // _foodBar.localPosition -= offset;
+            //_foodBar.localPosition -= offset;
         }
         // float destination = _foodBar.localPosition.
         // float lerpedValue = Mathf.Lerp(_foodBar.localPosition.x,)
-        _foodBar.localPosition = new Vector3(Mathf.Lerp(_foodBar.localPosition.x, _destination, _timer),
-            _foodBar.localPosition.y, _foodBar.localPosition.z);
+        //_foodBar.localPosition = new Vector3(Mathf.Lerp(_foodBar.localPosition.x, _destination, _timer),
+        // _foodBar.localPosition.y, _foodBar.localPosition.z);
+
+        _foodBar.fillAmount = _currFood / 150;
+
+        
         // Vector3 offset = new Vector3(_drain, 0, 0);
         if (_currFood <= 0)
         {
@@ -83,12 +88,9 @@ public class FoodSystem : MonoBehaviour
             if (_currFood >= _maxFood)
             {
                 _currFood = _maxFood;
-                _foodBar.position = new Vector3(75, _foodBar.position.y, _foodBar.position.z);
             }
             else
             {
-                Vector3 offset = new Vector3(_eatAmount, 0, 0);
-                _foodBar.localPosition += offset;
             }
         }
         _spawner.HandleEat(food);

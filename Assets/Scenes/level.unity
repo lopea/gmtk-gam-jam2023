@@ -2935,6 +2935,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 932926113540619671, guid: 24e1cc6f117c9f040be22f560e3c71d0, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24e1cc6f117c9f040be22f560e3c71d0, type: 3}
 --- !u!4 &173372866 stripped
@@ -20338,9 +20342,8 @@ MonoBehaviour:
   percentChanceBait: 20
   baitDelay: 2
   baitTrap: {fileID: 7969244124179570246, guid: c5da593f7a6bc1445b7294e66021dff7, type: 3}
-  _drain: 5
+  _drain: 1
   _maxFood: 150
-  _eatAmount: 15
   _rod: {fileID: 47460296}
   _currFood: 0
   gracePeriod: 0
