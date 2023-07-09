@@ -146,5 +146,8 @@ public class RodEvent : MonoBehaviour
             if(obj != null)
                 obj.SetActive(true);
         }
+        ScoreManager.Instance.AddScore(30);
+
+        
     }
 }
