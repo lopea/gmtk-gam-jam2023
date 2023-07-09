@@ -20,14 +20,14 @@ public class GameStateManager : MonoBehaviour
 
     public void HandleLose()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         _loseUI.SetActive(true);
     }
     
     public void HandleWin()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         _winUI.SetActive(true);
     }

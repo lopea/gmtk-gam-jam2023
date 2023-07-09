@@ -70,10 +70,11 @@ public class RodEvent : MonoBehaviour
         {
             _eventStarted = true;
             _baitTrap = bait;
-            Vector3 randomPos = Random.onUnitSphere * 10;
+            Vector3 randomPos = new Vector3(Random.Range(0, 1f), 0, Random.Range(0, 1f));
+            randomPos *= 4f;
             randomPos.y = 7;
-            transform.position = randomPos;
-            transform.LookAt(new Vector3(0, 7, 0));
+            transform.position = _player.transform.position + randomPos;
+            transform.LookAt(new Vector3(_player.transform.position.x, 7, _player.transform.position.z));
             _cameraTransform.position = new Vector3(_player.transform.position.x, 10, _player.transform.position.z);
             _line.SetPosition(0, _rodEndPoint.transform.position);
             _line.SetPosition(1, bait.transform.position);
@@ -96,6 +97,10 @@ public class RodEvent : MonoBehaviour
         _timer -= Time.deltaTime;
         if (_timer <= 0f)
         {
+            Vector3 dir = transform.position - _player.transform.position;
+            dir.Normalize();
+            dir.y = 0;
+            _forceDir = dir;
             _playerRb.AddForce(_forceDir * _forceMag, ForceMode.Impulse);
             _timer = _forceInterval;
         }
