@@ -33,8 +33,8 @@ public class FishNPC : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player");
-        _spawnX = 35;
-        _spawnZ = 22;
+        _spawnX = 30;
+        _spawnZ = 17;
         currBait = 0;
         _bait.Capacity = 10;
         _rb = GetComponent<Rigidbody>();
@@ -62,7 +62,7 @@ public class FishNPC : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, pos) > 1.0f)
         {
-            var dir = (dontChange ? _rb.velocity.normalized : Vector3.Normalize(pos - transform.position)) * Random.Range(2.0f, 10.0f);
+            var dir = (dontChange ? _rb.velocity.normalized : Vector3.Normalize(pos - transform.position)) * Random.Range(2.0f, 5.0f);
             _rb.AddForce(dir, ForceMode.Acceleration);
             transform.rotation = Quaternion.LookRotation(_rb.velocity) * Quaternion.Euler(0, 90, 0);
         }

@@ -78,7 +78,7 @@ public class CameraControls : MonoBehaviour
             float t = timer / time;
 
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, newTransform.transform.position, t);
-            Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, newTransform.transform.rotation, t);
+            Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.Euler(90, 0, 0), t);
             timer += Time.deltaTime;
             yield return null;
         }

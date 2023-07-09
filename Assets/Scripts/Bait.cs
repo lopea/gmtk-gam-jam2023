@@ -14,6 +14,7 @@ public class Bait : MonoBehaviour
 
     [SerializeField] private GameObject _rod;
     private bool _failed;
+    private bool _passed = false;
 
 
     void Awake()
@@ -65,7 +66,7 @@ public class Bait : MonoBehaviour
         {
             Pass();
         }
-        if (quickTime <= 0f && !_failed)
+        else if (quickTime <= 0f && !_failed && !_passed)
         {
             Fail();
             _failed = true;
@@ -75,6 +76,7 @@ public class Bait : MonoBehaviour
 
     void Pass()
     {
+        _passed = true;
         Time.timeScale = 1.0f;
         StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToOriginal(baitCam.transform, 0.3f));
         Destroy(gameObject, 0.3f);
@@ -84,5 +86,6 @@ public class Bait : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         _rod.GetComponent<RodEvent>().StartRodEvent(gameObject);
+        Destroy(gameObject, 0.1f);
     }
 }
