@@ -15,6 +15,6 @@ public class Bob : MonoBehaviour
 
     private void Update()
     {
-        transform.position = pos + direction * (Mathf.Sin(2.0f * Mathf.PI * freq) * amplitude);
+        transform.position = pos + direction * (Mathf.Sin(2.0f * Mathf.PI * freq  * Time.time) * amplitude);
     }
 }
