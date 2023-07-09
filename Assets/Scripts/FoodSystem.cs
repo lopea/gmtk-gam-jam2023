@@ -116,7 +116,7 @@ public class FoodSystem : MonoBehaviour
             return true;
         }
         ScoreManager.Instance.AddScore(15);
-        GameObject _score = Instantiate(_scoreIndicator, transform);
+        GameObject _score = Instantiate(_scoreIndicator, transform.position, transform.rotation);
         _score.GetComponent<ScoreIndicator>().SetupText(15, transform.position);
         return false;
     }

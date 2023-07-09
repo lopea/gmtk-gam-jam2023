@@ -1824,6 +1824,10 @@ PrefabInstance:
       propertyPath: soudn
       value: 
       objectReference: {fileID: -3489239191193367713, guid: 9cbae222dcfa84ef6b8450f75b14d1d9, type: 3}
+    - target: {fileID: 1160836488072902923, guid: 0df50f4f5db4e674c9834b97a415b0c7, type: 3}
+      propertyPath: _scoreIndicator
+      value: 
+      objectReference: {fileID: 6614935586527728228, guid: b3eae077d3790ea4390e26abb074fb00, type: 3}
     - target: {fileID: 1160836488072902934, guid: 0df50f4f5db4e674c9834b97a415b0c7, type: 3}
       propertyPath: m_Name
       value: Rod
@@ -20610,6 +20614,7 @@ MonoBehaviour:
   _maxFood: 150
   _rod: {fileID: 47460296}
   _currFood: 0
+  _scoreIndicator: {fileID: 6614935586527728228, guid: b3eae077d3790ea4390e26abb074fb00, type: 3}
   gracePeriod: 0
 --- !u!114 &1704152185
 MonoBehaviour:

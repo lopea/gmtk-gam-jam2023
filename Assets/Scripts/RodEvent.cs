@@ -36,6 +36,7 @@ public class RodEvent : MonoBehaviour
 
     private FoodSystem _foodSystem;
 
+    [SerializeField]
     private GameObject _scoreIndicator;
 
     private float _grace;
@@ -156,7 +157,7 @@ public class RodEvent : MonoBehaviour
                 obj.SetActive(true);
         }
         ScoreManager.Instance.AddScore(30);
-        GameObject _score = Instantiate(_scoreIndicator, _player.transform);
+        GameObject _score = Instantiate(_scoreIndicator, _player.transform.position, _player.transform.rotation);
         _score.GetComponent<ScoreIndicator>().SetupText(30, _player.transform.position);
         _foodSystem.gracePeriod = true;
         Destroy(_inst);

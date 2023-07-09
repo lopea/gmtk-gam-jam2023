@@ -7,13 +7,14 @@ public class ScoreIndicator : MonoBehaviour
 {
     private Rigidbody _rb;
 
-    private TextMeshProUGUI _text;
+    private TMP_Text _text;
     
     // Start is called before the first frame update
     void Awake()
     {
+        _text = GetComponentInChildren<TMP_Text>();
         _rb = GetComponent<Rigidbody>();
-        transform.LookAt(Camera.main.transform);
+        transform.LookAt(_text.transform);
         transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
     }
 
@@ -22,7 +23,9 @@ public class ScoreIndicator : MonoBehaviour
     {
         Destroy(gameObject, 2f);
         _rb.velocity = Vector3.up;
-        _text.color -= new Color(0, 0, 0, 50);
+        _text.transform.LookAt(Camera.main.transform);
+        _text.transform.rotation = _text.transform.rotation * Quaternion.Euler(0, 180, 0);
+        _text.color -= new Color(0, 0, 0, Time.deltaTime * .5f);
     }
 
     public void SetupText(float score, Vector3 pos)
