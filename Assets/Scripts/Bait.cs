@@ -9,7 +9,6 @@ public class Bait : MonoBehaviour
     private char quickAnswer;
 
     public GameObject baitCam;
-    public GameObject baitText;
     public GameObject quickText;
 
     [SerializeField] private GameObject _rod;
@@ -31,21 +30,6 @@ public class Bait : MonoBehaviour
         Time.timeScale = 0.1f;
 
         StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpFromOriginal(baitCam.transform, 0.05f));
-
-
-        //Display the Quicktime Key (Either Q or E)
-        int quickRand = Random.Range(0, 100);
-
-        if (quickRand > 50)
-        {
-            quickText.GetComponent<TextMeshProUGUI>().text = "[Q]";
-            quickAnswer = 'Q';
-        }
-        else
-        {
-            quickText.GetComponent<TextMeshProUGUI>().text = "[E]";
-            quickAnswer = 'E';
-        }
     }
 
     // Update is called once per frame
@@ -56,17 +40,7 @@ public class Bait : MonoBehaviour
         //Start timer for quicktime over
         if (quickTime > 0)
             quickTime -= Time.deltaTime * 10f;
-
-        //If key is correct, end event and have player "dodge" the bait trap
-        if(quickAnswer == 'Q' && Input.GetKeyDown(KeyCode.Q))
-        {
-            Pass();
-        }
-        else if(quickAnswer == 'E' && Input.GetKeyDown(KeyCode.E))
-        {
-            Pass();
-        }
-        else if (quickTime <= 0f && !_failed && !_passed)
+        else if (quickTime <= 0f && !_failed)
         {
             Fail();
             _failed = true;
@@ -74,13 +48,13 @@ public class Bait : MonoBehaviour
         //If key is wrong or timer runs out, thing fails and move on to catch event.
     }
 
-    void Pass()
+    /*void Pass()
     {
         _passed = true;
         Time.timeScale = 1.0f;
         StartCoroutine(Camera.main.GetComponent<CameraControls>().CameraLerpToOriginal(baitCam.transform, 0.3f));
         Destroy(gameObject, 0.3f);
-    }
+    }*/
 
     void Fail()
     {
