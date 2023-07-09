@@ -14,7 +14,7 @@ public class BaitCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             _system.BaitCheck(transform.parent.gameObject);
         }

@@ -99,7 +99,7 @@ public class FoodSystem : MonoBehaviour
             //_rod.StartRodEvent(trap);
             return true;
         }
-
+        ScoreManager.Instance.AddScore(15);
         return false;
     }
 }
