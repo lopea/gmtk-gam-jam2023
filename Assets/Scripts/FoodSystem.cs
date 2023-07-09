@@ -9,7 +9,7 @@ public class FoodSystem : MonoBehaviour
 {
     public float percentChanceBait = 20f;
 
-    public float baitDelay = 2f;
+    public float baitDelay = 4f;
 
     public GameObject baitTrap;
 
@@ -30,6 +30,8 @@ public class FoodSystem : MonoBehaviour
     
     private float _destination;
     private BaitSpawner _spawner;
+    public bool gracePeriod;
+    private float _graceTimer;
     void Start()
     {
         _foodBar = GameObject.Find("FoodMeter").GetComponent<RectTransform>();
@@ -38,11 +40,21 @@ public class FoodSystem : MonoBehaviour
         _currFood = _maxFood;
         _timer = 0f;
         _drain = 5f;
+        _graceTimer = baitDelay;
     }
     
     void Update()
     {
-        
+        if (gracePeriod)
+        {
+            _graceTimer -= Time.deltaTime;
+        }
+
+        if (_graceTimer <= 0f)
+        {
+            gracePeriod = false;
+            _graceTimer = baitDelay;
+        }
         _timer += Time.deltaTime;
         if (_timer >= 1f)
         {
@@ -64,7 +76,7 @@ public class FoodSystem : MonoBehaviour
 
     void EatFood(GameObject food)
     {
-        if (!BaitCheck(food))
+        if (!BaitCheck(food) || gracePeriod)
         {
             Destroy(food);
             _currFood += _eatAmount;

@@ -198,13 +198,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   percentChanceBait: 20
-  baitDelay: 2
+  baitDelay: 4
   baitTrap: {fileID: 7969244124179570246, guid: c5da593f7a6bc1445b7294e66021dff7, type: 3}
   _drain: 5
   _maxFood: 150
   _eatAmount: 20
   _rod: {fileID: 1415143891}
   _currFood: 0
+  gracePeriod: 0
 --- !u!1 &541916633
 GameObject:
   m_ObjectHideFlags: 0
